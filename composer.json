@@ -1,0 +1,27 @@
+{
+    "name": "ardeveloppement/hal-navigator",
+    "description": "Simple client to navigate through a HAL response",
+    "keywords": ["API", "REST", "HAL", "browser"],
+    "homepage": "https://github.com/ArDeveloppement/HAL-Navigator",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ArDeveloppement",
+            "email": "contact@ardeveloppement.fr"
+        }
+    ],
+
+    "autoload": {
+        "psr-4": { "ArDev\\HAL\\": "src/" }
+    },
+
+    "require": {
+        "php": ">=5.4",
+        "doctrine/collections": "~1.2"
+    },
+
+    "require-dev": {
+        "phpunit/phpunit": "~4.4"
+    }
+}

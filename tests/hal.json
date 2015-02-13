@@ -1,0 +1,35 @@
+{
+    "_links": {
+        "self": { "href": "https://hipsters-db.com/john-doe" }
+    },
+    "firstname": "John",
+    "lastname": "Doe",
+    "_embedded": {
+        "feature": {
+            "_links": {
+                "self": { "href": "https://hipsters-db.com/john-doe/features" }
+            },
+            "beard": true,
+            "fixie": false,
+            "tile_shirt": true,
+            "vegan": false,
+            "level": 5
+        },
+        "bikes": [
+            {
+                "_links": {
+                    "self": { "href": "https://hipsters-db.com/john-doe/bikes/1" }
+                },
+                "brand": "Fix cycles",
+                "swag": 10
+            },
+            {
+                "_links": {
+                    "self": { "href": "https://hipsters-db.com/john-doe/bikes/2" }
+                },
+                "brand": "Prestige",
+                "swag": 43
+            }
+        ]
+    }
+}
