@@ -44,8 +44,6 @@ class Navigator
         if ('rels' == $key) {
             return $this->getRels();
         }
-
-        throw new \InvalidArgumentException(sprintf('Property %s not found', $key));
     }
 
     /**
@@ -88,27 +86,26 @@ class Navigator
      * Get an embedded
      *
      * @param  string $key
-     * @return Navigator | ArrayCollection[Navigator]
+     * @return Navigator | NavigatorCollection[Navigator]
      */
     public function getEmbedded($key)
     {
         if (!$this->isEmbeddedExists($key)) {
-            return new self();
+            return new NavigatorCollection();
         }
 
         $embedded = $this->content[static::EMBEDDED][$key];
 
-        if (
-            is_array($embedded)
-            && !empty($embedded)
-            && is_int(array_keys($embedded)[0])
-        ) {
-            $collection = new ArrayCollection();
-            foreach ($embedded as $e) {
-                $collection->add(new self($e));
+        if (is_array($embedded)) {
+            if (!empty($embedded)) {
+                if (is_int(array_keys($embedded)[0])) {
+                    return new NavigatorCollection($embedded);
+                }
+
+                return new self($embedded);
             }
 
-            return $collection;
+            return new NavigatorCollection();
         }
 
         return new self($embedded);
