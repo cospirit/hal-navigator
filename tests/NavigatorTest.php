@@ -24,16 +24,14 @@ class NavigatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('John', $nav->firstname);
         $this->assertInstanceOf('ArDev\HAL\RelCollection', $nav->rels);
         $this->assertInstanceOf('ArDev\HAL\Navigator', $nav->feature);
-        $this->assertInstanceOf('Doctrine\Common\Collections\ArrayCollection', $nav->bikes);
+        $this->assertInstanceOf('ArDev\HAL\NavigatorCollection', $nav->bikes);
     }
 
     public function testWrongMagicAccessor()
     {
-        $this->setExpectedException('InvalidArgumentException');
-
         $nav = $this->createNavigator();
 
-        $nav->age;
+        $this->assertNull($nav->age);
     }
 
     public function testAll()
@@ -70,9 +68,8 @@ class NavigatorTest extends \PHPUnit_Framework_TestCase
         // empty Navigator
         $emptyNav = $nav->getEmbedded('shirts');
 
-        $this->assertInstanceOf('ArDev\HAL\Navigator', $emptyNav);
-        $this->assertEmpty($emptyNav->all());
-        $this->assertEmpty($emptyNav->rels->all());
+        $this->assertInstanceOf('ArDev\HAL\NavigatorCollection', $emptyNav);
+        $this->assertEmpty($emptyNav);
 
         // Simple embedded
         $feature = $nav->getEmbedded('feature');
@@ -85,10 +82,10 @@ class NavigatorTest extends \PHPUnit_Framework_TestCase
         // Collection embedded
         $bikes = $nav->getEmbedded('bikes');
 
-        $this->assertInstanceOf('Doctrine\Common\Collections\ArrayCollection', $bikes);
+        $this->assertInstanceOf('ArDev\HAL\NavigatorCollection', $bikes);
         $this->assertCount(2, $bikes);
 
-        $bike = $bikes[0];
+        $bike = $bikes['0'];
 
         $this->assertInstanceOf('ArDev\HAL\Navigator', $bike);
         $this->assertEquals('Fix cycles', $bike->brand);
