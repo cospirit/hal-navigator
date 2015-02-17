@@ -17,7 +17,7 @@ class NavigatorTest extends \PHPUnit_Framework_TestCase
         return new Navigator($content ?: self::getHalJson());
     }
 
-    public function testMagicAccessor()
+    public function testMagicGetter()
     {
         $nav = $this->createNavigator();
 
@@ -27,10 +27,19 @@ class NavigatorTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('ArDev\HAL\NavigatorCollection', $nav->bikes);
     }
 
-    public function testWrongMagicAccessor()
+    public function testWrongMagicGetter()
     {
         $nav = $this->createNavigator();
 
+        $this->assertNull($nav->age);
+    }
+
+    public function testMagicIsser()
+    {
+        $nav = $this->createNavigator();
+
+        $this->assertTrue(isset($nav->firstname));
+        $this->assertTrue(isset($nav->age));
         $this->assertNull($nav->age);
     }
 

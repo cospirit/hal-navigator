@@ -47,6 +47,17 @@ class Navigator
     }
 
     /**
+     * Magic isser
+     *
+     * @param  string $key
+     * @return bool
+     */
+    public function __isset($key)
+    {
+        return true;
+    }
+
+    /**
      * Get rels links
      *
      * @return RelCollection

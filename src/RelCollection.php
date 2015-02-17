@@ -42,6 +42,17 @@ class RelCollection
     }
 
     /**
+     * Magic isser
+     *
+     * @param  string $key
+     * @return bool
+     */
+    public function __isset($key)
+    {
+        return true;
+    }
+
+    /**
      * Get the href HAL key from a named link
      *
      * @param  string $key

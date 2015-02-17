@@ -22,7 +22,7 @@ class RelCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(3, $rels->all());
     }
 
-    public function testMagicAccessor()
+    public function testMagicGetter()
     {
         $rels = $this->createRelCollection();
 
@@ -32,6 +32,15 @@ class RelCollectionTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException('LogicException');
         $rels->badLink;
+    }
+
+    public function testMagicIsser()
+    {
+        $rels = $this->createRelCollection();
+
+        $this->assertTrue(isset($rels->self));
+        $this->assertTrue(isset($rels->anotherLink));
+        $this->assertNull($rels->anotherLink);
     }
 
     public function testGetHref()
