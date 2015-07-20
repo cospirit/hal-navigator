@@ -9,14 +9,14 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      *
      * @var array
      */
-    protected $_elements;
+    protected $elements;
 
     /**
      * @param array $elements
      */
     public function __construct(array $elements = array())
     {
-        $this->_elements = $elements;
+        $this->elements = $elements;
     }
 
     /**
@@ -35,7 +35,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      */
     public function toArray()
     {
-        return $this->_elements;
+        return $this->elements;
     }
 
     /**
@@ -43,7 +43,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      */
     public function first()
     {
-        return $this->createNavigator(reset($this->_elements));
+        return $this->createNavigator(reset($this->elements));
     }
 
     /**
@@ -51,7 +51,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      */
     public function last()
     {
-        return $this->createNavigator(end($this->_elements));
+        return $this->createNavigator(end($this->elements));
     }
 
     /**
@@ -59,7 +59,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      */
     public function key()
     {
-        return key($this->_elements);
+        return key($this->elements);
     }
 
     /**
@@ -67,7 +67,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      */
     public function next()
     {
-        return $this->createNavigator(next($this->_elements));
+        return $this->createNavigator(next($this->elements));
     }
 
     /**
@@ -75,7 +75,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      */
     public function current()
     {
-        return $this->createNavigator(current($this->_elements));
+        return $this->createNavigator(current($this->elements));
     }
 
     /**
@@ -83,9 +83,9 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      */
     public function remove($key)
     {
-        if (isset($this->_elements[$key]) || array_key_exists($key, $this->_elements)) {
-            $removed = $this->_elements[$key];
-            unset($this->_elements[$key]);
+        if (isset($this->elements[$key]) || array_key_exists($key, $this->elements)) {
+            $removed = $this->elements[$key];
+            unset($this->elements[$key]);
 
             return $removed;
         }
@@ -98,10 +98,10 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      */
     public function removeElement($element)
     {
-        $key = array_search($element, $this->_elements, true);
+        $key = array_search($element, $this->elements, true);
 
         if ($key !== false) {
-            unset($this->_elements[$key]);
+            unset($this->elements[$key]);
 
             return true;
         }
@@ -136,7 +136,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      */
     public function offsetSet($offset, $value)
     {
-        if ( ! isset($offset)) {
+        if (!isset($offset)) {
             return $this->add($value);
         }
         return $this->set($offset, $value);
@@ -157,7 +157,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      */
     public function containsKey($key)
     {
-        return isset($this->_elements[$key]) || array_key_exists($key, $this->_elements);
+        return isset($this->elements[$key]) || array_key_exists($key, $this->elements);
     }
 
     /**
@@ -165,15 +165,15 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      */
     public function contains($element)
     {
-        return in_array($element, $this->_elements, true);
+        return in_array($element, $this->elements, true);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function exists(Closure $p)
+    public function exists(\Closure $p)
     {
-        foreach ($this->_elements as $key => $element) {
+        foreach ($this->elements as $key => $element) {
             if ($p($key, $this->createNavigator($element))) {
                 return true;
             }
@@ -186,7 +186,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      */
     public function indexOf($element)
     {
-        return array_search($element, $this->_elements, true);
+        return array_search($element, $this->elements, true);
     }
 
     /**
@@ -194,8 +194,8 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      */
     public function get($key)
     {
-        if (isset($this->_elements[$key])) {
-            return $this->createNavigator($this->_elements[$key]);
+        if (isset($this->elements[$key])) {
+            return $this->createNavigator($this->elements[$key]);
         }
         return null;
     }
@@ -205,7 +205,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      */
     public function getKeys()
     {
-        return array_keys($this->_elements);
+        return array_keys($this->elements);
     }
 
     /**
@@ -213,7 +213,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      */
     public function getValues()
     {
-        return array_values($this->_elements);
+        return array_values($this->elements);
     }
 
     /**
@@ -221,7 +221,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      */
     public function count()
     {
-        return count($this->_elements);
+        return count($this->elements);
     }
 
     /**
@@ -229,7 +229,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      */
     public function set($key, $value)
     {
-        $this->_elements[$key] = $value;
+        $this->elements[$key] = $value;
     }
 
     /**
@@ -237,7 +237,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      */
     public function add($value)
     {
-        $this->_elements[] = $value;
+        $this->elements[] = $value;
         return true;
     }
 
@@ -246,7 +246,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      */
     public function isEmpty()
     {
-        return ! $this->_elements;
+        return ! $this->elements;
     }
 
     /**
@@ -256,7 +256,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      */
     public function getIterator()
     {
-        return new NavigatorIterator($this->_elements);
+        return new NavigatorIterator($this->elements);
     }
 
     /**
@@ -268,7 +268,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
             return $p($this->createNavigator($el));
         };
 
-        return new static(array_map($c, $this->_elements));
+        return new static(array_map($c, $this->elements));
     }
 
     /**
@@ -280,7 +280,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
             return $p($this->createNavigator($el));
         };
 
-        return new static(array_filter($this->_elements, $c));
+        return new static(array_filter($this->elements, $c));
     }
 
     /**
@@ -288,8 +288,8 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      */
     public function forAll(\Closure $p)
     {
-        foreach ($this->_elements as $key => $element) {
-            if ( ! $p($key, $this->createNavigator($element))) {
+        foreach ($this->elements as $key => $element) {
+            if (!$p($key, $this->createNavigator($element))) {
                 return false;
             }
         }
@@ -303,7 +303,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
     public function partition(\Closure $p)
     {
         $coll1 = $coll2 = array();
-        foreach ($this->_elements as $key => $element) {
+        foreach ($this->elements as $key => $element) {
             $this->createNavigator($element);
 
             if ($p($key, $element)) {
@@ -330,7 +330,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      */
     public function clear()
     {
-        $this->_elements = array();
+        $this->elements = array();
     }
 
     /**
@@ -338,6 +338,6 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      */
     public function slice($offset, $length = null)
     {
-        return new static(array_slice($this->_elements, $offset, $length, true));
+        return new static(array_slice($this->elements, $offset, $length, true));
     }
 }
