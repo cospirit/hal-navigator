@@ -1,8 +1,8 @@
 <?php
 
-namespace Test\ArDev\HAL;
+namespace Test\CoSpirit\HAL;
 
-use ArDev\HAL\RelCollection;
+use CoSpirit\HAL\RelCollection;
 
 class RelCollectionTest extends \PHPUnit_Framework_TestCase
 {

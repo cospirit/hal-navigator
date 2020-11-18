@@ -16,7 +16,7 @@ Basic usage
 ```php
 <?php
 
-use ArDev\HALNavigator;
+use CoSpirit\HAL\Navigator;
 
 $halContent = <<<EOF
 {
@@ -56,7 +56,7 @@ $halContent = <<<EOF
 }
 EOF;
 
-$nav = new HALNavigator(json_decode($halContent));
+$nav = new Navigator(json_decode($halContent));
 
 $nav->rels->self; // https://hipsters-db.com/john-doe
 $nav->firstname; // John

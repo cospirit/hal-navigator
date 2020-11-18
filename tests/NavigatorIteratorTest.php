@@ -1,8 +1,8 @@
 <?php
 
-namespace Test\ArDev\HAL;
+namespace Test\CoSpirit\HAL;
 
-use ArDev\HAL\NavigatorIterator;
+use CoSpirit\HAL\NavigatorIterator;
 
 class NavigatorIteratorTest extends \PHPUnit_Framework_TestCase
 {
@@ -16,7 +16,7 @@ class NavigatorIteratorTest extends \PHPUnit_Framework_TestCase
         $count = 0;
 
         foreach ($iterator as $nav) {
-            $this->assertInstanceOf('ArDev\HAL\Navigator', $nav);
+            $this->assertInstanceOf('CoSpirit\HAL\Navigator', $nav);
             $count++;
         }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace ArDev\HAL;
+namespace CoSpirit\HAL;
 
 class RelCollection
 {

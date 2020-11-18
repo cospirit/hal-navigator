@@ -1,6 +1,6 @@
 <?php
 
-namespace ArDev\HAL;
+namespace CoSpirit\HAL;
 
 use Doctrine\Common\Collections\ArrayCollection;
 

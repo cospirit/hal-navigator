@@ -1,9 +1,9 @@
 <?php
 
-namespace Test\ArDev\HAL;
+namespace Test\CoSpirit\HAL;
 
-use ArDev\HAL\Navigator;
-use ArDev\HAL\RelCollection;
+use CoSpirit\HAL\Navigator;
+use CoSpirit\HAL\RelCollection;
 
 class NavigatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,9 +22,9 @@ class NavigatorTest extends \PHPUnit_Framework_TestCase
         $nav = $this->createNavigator();
 
         $this->assertEquals('John', $nav->firstname);
-        $this->assertInstanceOf('ArDev\HAL\RelCollection', $nav->rels);
-        $this->assertInstanceOf('ArDev\HAL\Navigator', $nav->feature);
-        $this->assertInstanceOf('ArDev\HAL\NavigatorCollection', $nav->bikes);
+        $this->assertInstanceOf('CoSpirit\HAL\RelCollection', $nav->rels);
+        $this->assertInstanceOf('CoSpirit\HAL\Navigator', $nav->feature);
+        $this->assertInstanceOf('CoSpirit\HAL\NavigatorCollection', $nav->bikes);
     }
 
     public function testWrongMagicGetter()
@@ -58,8 +58,8 @@ class NavigatorTest extends \PHPUnit_Framework_TestCase
     {
         $nav = $this->createNavigator();
 
-        $this->assertInstanceOf('ArDev\HAL\RelCollection', $nav->rels);
-        $this->assertInstanceOf('ArDev\HAL\RelCollection', $nav->getRels());
+        $this->assertInstanceOf('CoSpirit\HAL\RelCollection', $nav->rels);
+        $this->assertInstanceOf('CoSpirit\HAL\RelCollection', $nav->getRels());
     }
 
     public function testIsEmbeddedExists()
@@ -77,13 +77,13 @@ class NavigatorTest extends \PHPUnit_Framework_TestCase
         // empty Navigator
         $emptyNav = $nav->getEmbedded('shirts');
 
-        $this->assertInstanceOf('ArDev\HAL\NavigatorCollection', $emptyNav);
+        $this->assertInstanceOf('CoSpirit\HAL\NavigatorCollection', $emptyNav);
         $this->assertEmpty($emptyNav);
 
         // Simple embedded
         $feature = $nav->getEmbedded('feature');
 
-        $this->assertInstanceOf('ArDev\HAL\Navigator', $feature);
+        $this->assertInstanceOf('CoSpirit\HAL\Navigator', $feature);
         $this->assertNotNull($feature->rels->self);
         $this->assertTrue($feature->beard);
         $this->assertEquals(5, $feature->level);
@@ -91,13 +91,13 @@ class NavigatorTest extends \PHPUnit_Framework_TestCase
         // Collection embedded
         $bikes = $nav->getEmbedded('bikes');
 
-        $this->assertInstanceOf('ArDev\HAL\NavigatorCollection', $bikes);
+        $this->assertInstanceOf('CoSpirit\HAL\NavigatorCollection', $bikes);
         $this->assertCount(2, $bikes);
 
         $bike = $bikes['0'];
 
-        $this->assertInstanceOf('ArDev\HAL\Navigator', $bike);
+        $this->assertInstanceOf('CoSpirit\HAL\Navigator', $bike);
         $this->assertEquals('Fix cycles', $bike->brand);
-        $this->assertInstanceOf('ArDev\HAL\RelCollection', $bike->rels);
+        $this->assertInstanceOf('CoSpirit\HAL\RelCollection', $bike->rels);
     }
 }
