@@ -1,8 +1,8 @@
 <?php
 
-namespace Test\ArDev\HAL;
+namespace Test\CoSpirit\HAL;
 
-use ArDev\HAL\NavigatorCollection;
+use CoSpirit\HAL\NavigatorCollection;
 
 class NavigatorCollectionTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,7 +21,7 @@ class NavigatorCollectionTest extends \PHPUnit_Framework_TestCase
 
         $nav = $collection->first();
 
-        $this->assertInstanceOf('ArDev\HAL\Navigator', $nav);
+        $this->assertInstanceOf('CoSpirit\HAL\Navigator', $nav);
         $this->assertEquals('john', $nav->name);
     }
 
@@ -31,7 +31,7 @@ class NavigatorCollectionTest extends \PHPUnit_Framework_TestCase
 
         $nav = $collection->last();
 
-        $this->assertInstanceOf('ArDev\HAL\Navigator', $nav);
+        $this->assertInstanceOf('CoSpirit\HAL\Navigator', $nav);
         $this->assertEquals('jane', $nav->name);
     }
 
@@ -41,12 +41,12 @@ class NavigatorCollectionTest extends \PHPUnit_Framework_TestCase
 
         $nav = $collection->next();
 
-        $this->assertInstanceOf('ArDev\HAL\Navigator', $nav);
+        $this->assertInstanceOf('CoSpirit\HAL\Navigator', $nav);
         $this->assertEquals('jessie', $nav->name);
 
         $nav = $collection->next();
 
-        $this->assertInstanceOf('ArDev\HAL\Navigator', $nav);
+        $this->assertInstanceOf('CoSpirit\HAL\Navigator', $nav);
         $this->assertEquals('jane', $nav->name);
     }
 
@@ -56,12 +56,12 @@ class NavigatorCollectionTest extends \PHPUnit_Framework_TestCase
 
         $second = $collection->next();
 
-        $this->assertInstanceOf('ArDev\HAL\Navigator', $second);
+        $this->assertInstanceOf('CoSpirit\HAL\Navigator', $second);
         $this->assertEquals('jessie', $second->name);
 
         $current = $collection->current();
 
-        $this->assertInstanceOf('ArDev\HAL\Navigator', $current);
+        $this->assertInstanceOf('CoSpirit\HAL\Navigator', $current);
         $this->assertEquals('jessie', $current->name);
     }
 
@@ -69,7 +69,7 @@ class NavigatorCollectionTest extends \PHPUnit_Framework_TestCase
     {
         $collection = $this->createNavigatorCollection();
 
-        $this->assertInstanceOf('ArDev\HAL\NavigatorIterator', $collection->getIterator());
+        $this->assertInstanceOf('CoSpirit\HAL\NavigatorIterator', $collection->getIterator());
     }
 
     public function testArrayAccess()

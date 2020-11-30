@@ -1,22 +1,59 @@
-HAL Navigator
-=============
+<p align="center">
+  <img src="doc/cospirit-connect.png">
+</p>
 
-**WIP**
+# HAL Navigator [![CircleCI](https://circleci.com/gh/cospirit/hal-navigator.svg?style=shield&circle-token=83d86dff77250ed8812fe50f0df7ad7085e14261)](https://circleci.com/gh/cospirit/hal-navigator)
 
 Simple client to navigate through an HAL response
 
-![](http://mondesfrancophones.com/wp-content/uploads/2012/02/Cousteau-2.jpg)
+## Development
 
-Installation
-------------
+### Requirements
 
-Basic usage
------------
+Install Docker as described in the [_Docker_](https://app.gitbook.com/@cospirit-connect/s/guide-de-demarrage/installation-des-projets/prerequis/docker) section of the Start Guide.
+
+### Installation
+
+Check the [Start guide](https://app.gitbook.com/@cospirit-connect/s/guide-de-demarrage/) of the documentation for base initialization.
+
+#### Initialize project
+
+```bash
+    make development@install
+```
+
+### Usage (with Docker)
+
+Install the application :
+```bash
+    make development@install
+```
+
+Restart the docker compose service :
+```bash
+    make development@restart
+```
+
+Remove and clean docker containers :
+```bash
+    make development@down
+```
+
+## Tests
+
+```bash
+    make test@coke
+```
+```bash
+    make test@phpunit
+```
+
+## Basic usage
 
 ```php
 <?php
 
-use ArDev\HALNavigator;
+use CoSpirit\HAL\Navigator;
 
 $halContent = <<<EOF
 {
@@ -56,7 +93,7 @@ $halContent = <<<EOF
 }
 EOF;
 
-$nav = new HALNavigator(json_decode($halContent));
+$nav = new Navigator(json_decode($halContent));
 
 $nav->rels->self; // https://hipsters-db.com/john-doe
 $nav->firstname; // John

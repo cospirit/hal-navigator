@@ -1,19 +1,19 @@
 {
-    "name": "ardeveloppement/hal-navigator",
+    "name": "cospirit/hal-navigator",
     "description": "Simple client to navigate through a HAL response",
     "keywords": ["API", "REST", "HAL", "browser"],
-    "homepage": "https://github.com/ArDeveloppement/HAL-Navigator",
+    "homepage": "https://github.com/cospirit/hal-navigator",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "ArDeveloppement",
-            "email": "contact@ardeveloppement.fr"
+            "name": "CoSpirit",
+            "email": "dsi.poledev@cospirit.com"
         }
     ],
 
     "autoload": {
-        "psr-4": { "ArDev\\HAL\\": "src/" }
+        "psr-4": { "CoSpirit\\HAL\\": "src/" }
     },
 
     "require": {
@@ -22,7 +22,8 @@
 
     "require-dev": {
         "phpunit/phpunit": "~4.4",
-        "m6web/coke": "~1.2"
+        "m6web/coke": "~1.2",
+        "friendsofphp/php-cs-fixer": "^2.2"
     },
 
     "config": {
