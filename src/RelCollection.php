@@ -7,12 +7,12 @@ class RelCollection
     public const HREF = 'href';
 
     /**
-     * @var object|array
+     * @var mixed[]
      */
     protected $rels;
 
     /**
-     * @param object|array $rels
+     * @param object|mixed[] $rels
      */
     public function __construct($rels = null)
     {
@@ -21,6 +21,8 @@ class RelCollection
 
     /**
      * Get all rels.
+     *
+     * @return mixed[]
      */
     public function all(): array
     {
@@ -43,10 +45,8 @@ class RelCollection
 
     /**
      * @param string $key
-     *
-     * @return bool
      */
-    public function __isset($key)
+    public function __isset($key): bool
     {
         return true;
     }
@@ -73,7 +73,7 @@ class RelCollection
         return null;
     }
 
-    protected function dasheize($str): string
+    protected function dasheize(string $str): string
     {
         return strtolower(preg_replace('~(?<=\\w)([A-Z])~', '-$1', $str));
     }

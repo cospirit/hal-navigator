@@ -8,17 +8,17 @@ class Navigator
     public const EMBEDDED = '_embedded';
 
     /**
-     * @var object|array
+     * @var mixed[]
      */
     protected $content;
 
     /**
-     * @var RelCollection
+     * @var RelCollection|null
      */
     protected $rels;
 
     /**
-     * @param object|array $content
+     * @param object|mixed[] $content
      */
     public function __construct($content = null)
     {
@@ -26,13 +26,9 @@ class Navigator
     }
 
     /**
-     * Magic accessor.
-     *
      * @param string $key
-     *
-     * @return mixed
      */
-    public function __get($key)
+    public function __get($key): mixed
     {
         if (array_key_exists($key, $this->content)) {
             return $this->content[$key];
@@ -43,6 +39,8 @@ class Navigator
         if ('rels' == $key) {
             return $this->getRels();
         }
+
+        return null;
     }
 
     /**
@@ -123,7 +121,7 @@ class Navigator
     /**
      * Return all key/values.
      *
-     * @return array
+     * @return mixed[]
      */
     public function all()
     {

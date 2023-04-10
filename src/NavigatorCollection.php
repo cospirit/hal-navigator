@@ -2,28 +2,28 @@
 
 namespace CoSpirit\HAL;
 
-class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAccess
+final class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAccess
 {
     /**
-     * An array containing the entries of this collection.
+     * @param mixed[] $elements An array containing the entries of this collection.
      */
-    protected array $elements;
-
-    public function __construct(array $elements = [])
+    public function __construct(private array $elements = [])
     {
-        $this->elements = $elements;
     }
 
     /**
      * Create an Navigator object.
      *
-     * @param array|object $element
+     * @param mixed[]|object $element
      */
     protected function createNavigator($element): Navigator
     {
         return new Navigator($element);
     }
 
+    /**
+     * @return mixed[]
+     */
     public function toArray(): array
     {
         return $this->elements;
@@ -54,7 +54,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
         return $this->createNavigator(current($this->elements));
     }
 
-    public function remove($key): mixed
+    public function remove(string|int $key): mixed
     {
         if (isset($this->elements[$key]) || array_key_exists($key, $this->elements)) {
             $removed = $this->elements[$key];
@@ -66,7 +66,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
         return null;
     }
 
-    public function removeElement($element): bool
+    public function removeElement(mixed $element): bool
     {
         $key = array_search($element, $this->elements, true);
 
@@ -123,12 +123,12 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
         $this->remove($offset);
     }
 
-    public function containsKey($key): bool
+    public function containsKey(string|int $key): bool
     {
         return isset($this->elements[$key]) || array_key_exists($key, $this->elements);
     }
 
-    public function contains($element): bool
+    public function contains(mixed $element): bool
     {
         return in_array($element, $this->elements, true);
     }
@@ -144,12 +144,12 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
         return false;
     }
 
-    public function indexOf($element): string|int|bool
+    public function indexOf(mixed $element): string|int|bool
     {
         return array_search($element, $this->elements, true);
     }
 
-    public function get($key): ?Navigator
+    public function get(string|int $key): ?Navigator
     {
         if (isset($this->elements[$key])) {
             return $this->createNavigator($this->elements[$key]);
@@ -158,11 +158,17 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
         return null;
     }
 
+    /**
+     * @return array-key[]
+     */
     public function getKeys(): array
     {
         return array_keys($this->elements);
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getValues(): array
     {
         return array_values($this->elements);
@@ -173,12 +179,12 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
         return count($this->elements);
     }
 
-    public function set($key, $value): void
+    public function set(string|int $key, mixed $value): void
     {
         $this->elements[$key] = $value;
     }
 
-    public function add($value): bool
+    public function add(mixed $value): bool
     {
         $this->elements[] = $value;
 
@@ -250,10 +256,8 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
 
     /**
      * Returns a string representation of this object.
-     *
-     * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return __CLASS__.'@'.spl_object_hash($this);
     }
@@ -263,7 +267,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
         $this->elements = [];
     }
 
-    public function slice($offset, $length = null): self
+    public function slice(int $offset, ?int $length = null): self
     {
         return new static(array_slice($this->elements, $offset, $length, true));
     }

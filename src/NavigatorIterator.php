@@ -6,14 +6,11 @@ class NavigatorIterator implements \Iterator
 {
     protected int $position;
 
-    protected array $elements;
-
     /**
-     * Constructor.
+     * @param mixed[] $elements
      */
-    public function __construct(array $elements)
+    public function __construct(protected array $elements)
     {
-        $this->elements = $elements;
         $this->position = 0;
     }
 
