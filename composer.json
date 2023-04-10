@@ -16,6 +16,12 @@
         "psr-4": { "CoSpirit\\HAL\\": "src/" }
     },
 
+    "autoload-dev": {
+        "psr-4": {
+            "Test\\CoSpirit\\HAL\\": "tests/"
+        }
+    },
+
     "require": {
         "php": ">=5.4"
     },
