@@ -24,9 +24,10 @@ class NavigatorIterator implements \Iterator
     }
 
     /**
-     * Create a new Navigator object from an element
+     * Create a new Navigator object from an element.
      *
-     * @param  int $position
+     * @param int $position
+     *
      * @return Navigator
      */
     protected function get($position)

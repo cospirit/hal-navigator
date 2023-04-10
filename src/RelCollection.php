@@ -4,15 +4,15 @@ namespace CoSpirit\HAL;
 
 class RelCollection
 {
-    const HREF = 'href';
+    public const HREF = 'href';
 
     /**
-     * @var object | array
+     * @var object|array
      */
     protected $rels;
 
     /**
-     * @param object | array
+     * @param object|array
      */
     public function __construct($rels = null)
     {
@@ -20,7 +20,7 @@ class RelCollection
     }
 
     /**
-     * Get all rels
+     * Get all rels.
      *
      * @return array
      */
@@ -30,11 +30,13 @@ class RelCollection
     }
 
     /**
-     * Another way to access href of a named link
+     * Another way to access href of a named link.
      *
      * @see    self::getHref
-     * @param  string $key
-     * @return string | null
+     *
+     * @param string $key
+     *
+     * @return string|null
      */
     public function __get($key)
     {
@@ -42,9 +44,10 @@ class RelCollection
     }
 
     /**
-     * Magic isser
+     * Magic isser.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return bool
      */
     public function __isset($key)
@@ -53,11 +56,13 @@ class RelCollection
     }
 
     /**
-     * Get the href HAL key from a named link
+     * Get the href HAL key from a named link.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @throws \LogicException If HAL format is not respected
-     * @return string | null
+     *
+     * @return string|null
      */
     public function getHref($key)
     {

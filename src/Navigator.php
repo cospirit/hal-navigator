@@ -2,15 +2,13 @@
 
 namespace CoSpirit\HAL;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
 class Navigator
 {
-    const RELS = '_links';
-    const EMBEDDED = '_embedded';
+    public const RELS = '_links';
+    public const EMBEDDED = '_embedded';
 
     /**
-     * @var object | array
+     * @var object|array
      */
     protected $content;
 
@@ -20,7 +18,7 @@ class Navigator
     protected $rels;
 
     /**
-     * @param object | array $content
+     * @param object|array $content
      */
     public function __construct($content = null)
     {
@@ -28,9 +26,10 @@ class Navigator
     }
 
     /**
-     * Magic accessor
+     * Magic accessor.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return mixed
      */
     public function __get($key)
@@ -47,9 +46,10 @@ class Navigator
     }
 
     /**
-     * Magic isser
+     * Magic isser.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return bool
      */
     public function __isset($key)
@@ -58,7 +58,7 @@ class Navigator
     }
 
     /**
-     * Get rels links
+     * Get rels links.
      *
      * @return RelCollection
      */
@@ -76,10 +76,11 @@ class Navigator
     }
 
     /**
-     * Check if an embedded exists
+     * Check if an embedded exists.
      *
-     * @param  string  $key
-     * @return boolean
+     * @param string $key
+     *
+     * @return bool
      */
     public function isEmbeddedExists($key)
     {
@@ -94,9 +95,10 @@ class Navigator
     }
 
     /**
-     * Get an embedded
+     * Get an embedded.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return Navigator | NavigatorCollection[Navigator]
      */
     public function getEmbedded($key)
@@ -123,7 +125,7 @@ class Navigator
     }
 
     /**
-     * Return all key/values
+     * Return all key/values.
      *
      * @return array
      */
