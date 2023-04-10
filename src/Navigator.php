@@ -46,13 +46,11 @@ class Navigator
     }
 
     /**
-     * Magic isser.
-     *
      * @param string $key
      *
      * @return bool
      */
-    public function __isset($key)
+    public function __isset($key): bool
     {
         return true;
     }
@@ -79,10 +77,8 @@ class Navigator
      * Check if an embedded exists.
      *
      * @param string $key
-     *
-     * @return bool
      */
-    public function isEmbeddedExists($key)
+    public function isEmbeddedExists($key): bool
     {
         if (
             array_key_exists(static::EMBEDDED, $this->content)
@@ -99,7 +95,7 @@ class Navigator
      *
      * @param string $key
      *
-     * @return Navigator | NavigatorCollection[Navigator]
+     * @return Navigator | NavigatorCollection<Navigator>
      */
     public function getEmbedded($key)
     {

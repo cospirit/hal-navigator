@@ -12,7 +12,7 @@ class RelCollection
     protected $rels;
 
     /**
-     * @param object|array
+     * @param object|array $rels
      */
     public function __construct($rels = null)
     {
@@ -21,10 +21,8 @@ class RelCollection
 
     /**
      * Get all rels.
-     *
-     * @return array
      */
-    public function all()
+    public function all(): array
     {
         return $this->rels;
     }
@@ -44,8 +42,6 @@ class RelCollection
     }
 
     /**
-     * Magic isser.
-     *
      * @param string $key
      *
      * @return bool
@@ -77,7 +73,7 @@ class RelCollection
         return null;
     }
 
-    protected function dasheize($str)
+    protected function dasheize($str): string
     {
         return strtolower(preg_replace('~(?<=\\w)([A-Z])~', '-$1', $str));
     }
