@@ -2,9 +2,12 @@
 
 namespace Test\CoSpirit\HAL;
 
+use CoSpirit\HAL\Navigator;
 use CoSpirit\HAL\NavigatorCollection;
+use CoSpirit\HAL\NavigatorIterator;
+use PHPUnit\Framework\TestCase;
 
-class NavigatorCollectionTest extends \PHPUnit_Framework_TestCase
+class NavigatorCollectionTest extends TestCase
 {
     protected function createNavigatorCollection()
     {
@@ -21,7 +24,7 @@ class NavigatorCollectionTest extends \PHPUnit_Framework_TestCase
 
         $nav = $collection->first();
 
-        $this->assertInstanceOf('CoSpirit\HAL\Navigator', $nav);
+        $this->assertInstanceOf(Navigator::class, $nav);
         $this->assertEquals('john', $nav->name);
     }
 
@@ -31,7 +34,7 @@ class NavigatorCollectionTest extends \PHPUnit_Framework_TestCase
 
         $nav = $collection->last();
 
-        $this->assertInstanceOf('CoSpirit\HAL\Navigator', $nav);
+        $this->assertInstanceOf(Navigator::class, $nav);
         $this->assertEquals('jane', $nav->name);
     }
 
@@ -41,12 +44,12 @@ class NavigatorCollectionTest extends \PHPUnit_Framework_TestCase
 
         $nav = $collection->next();
 
-        $this->assertInstanceOf('CoSpirit\HAL\Navigator', $nav);
+        $this->assertInstanceOf(Navigator::class, $nav);
         $this->assertEquals('jessie', $nav->name);
 
         $nav = $collection->next();
 
-        $this->assertInstanceOf('CoSpirit\HAL\Navigator', $nav);
+        $this->assertInstanceOf(Navigator::class, $nav);
         $this->assertEquals('jane', $nav->name);
     }
 
@@ -56,12 +59,12 @@ class NavigatorCollectionTest extends \PHPUnit_Framework_TestCase
 
         $second = $collection->next();
 
-        $this->assertInstanceOf('CoSpirit\HAL\Navigator', $second);
+        $this->assertInstanceOf(Navigator::class, $second);
         $this->assertEquals('jessie', $second->name);
 
         $current = $collection->current();
 
-        $this->assertInstanceOf('CoSpirit\HAL\Navigator', $current);
+        $this->assertInstanceOf(Navigator::class, $current);
         $this->assertEquals('jessie', $current->name);
     }
 
@@ -69,7 +72,7 @@ class NavigatorCollectionTest extends \PHPUnit_Framework_TestCase
     {
         $collection = $this->createNavigatorCollection();
 
-        $this->assertInstanceOf('CoSpirit\HAL\NavigatorIterator', $collection->getIterator());
+        $this->assertInstanceOf(NavigatorIterator::class, $collection->getIterator());
     }
 
     public function testArrayAccess()
