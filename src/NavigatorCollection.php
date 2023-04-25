@@ -2,86 +2,59 @@
 
 namespace CoSpirit\HAL;
 
-class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAccess
+final class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAccess
 {
     /**
-     * An array containing the entries of this collection.
-     *
-     * @var array
+     * @param mixed[] $elements An array containing the entries of this collection.
      */
-    protected $elements;
-
-    /**
-     * @param array $elements
-     */
-    public function __construct(array $elements = array())
+    public function __construct(private array $elements = [])
     {
-        $this->elements = $elements;
     }
 
     /**
-     * Create an Navigator object
+     * Create an Navigator object.
      *
-     * @param  array | object $element
-     * @return Navigator
+     * @param mixed[]|object $element
      */
-    protected function createNavigator($element)
+    protected function createNavigator($element): Navigator
     {
         return new Navigator($element);
     }
 
     /**
-     * {@inheritDoc}
+     * @return mixed[]
      */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->elements;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function first()
+    public function first(): Navigator
     {
         return $this->createNavigator(reset($this->elements));
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function last()
+    public function last(): Navigator
     {
         return $this->createNavigator(end($this->elements));
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function key()
+    public function key(): string|int
     {
         return key($this->elements);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function next()
+    public function next(): Navigator
     {
         return $this->createNavigator(next($this->elements));
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function current()
+    public function current(): Navigator
     {
         return $this->createNavigator(current($this->elements));
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function remove($key)
+    public function remove(string|int $key): mixed
     {
         if (isset($this->elements[$key]) || array_key_exists($key, $this->elements)) {
             $removed = $this->elements[$key];
@@ -93,14 +66,11 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
         return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function removeElement($element)
+    public function removeElement(mixed $element): bool
     {
         $key = array_search($element, $this->elements, true);
 
-        if ($key !== false) {
+        if (false !== $key) {
             unset($this->elements[$key]);
 
             return true;
@@ -114,7 +84,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      *
      * {@inheritDoc}
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return $this->containsKey($offset);
     }
@@ -124,7 +94,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      *
      * {@inheritDoc}
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): ?Navigator
     {
         return $this->get($offset);
     }
@@ -134,12 +104,13 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      *
      * {@inheritDoc}
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (!isset($offset)) {
-            return $this->add($value);
+            $this->add($value);
         }
-        return $this->set($offset, $value);
+
+        $this->set($offset, $value);
     }
 
     /**
@@ -147,106 +118,82 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      *
      * {@inheritDoc}
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
-        return $this->remove($offset);
+        $this->remove($offset);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function containsKey($key)
+    public function containsKey(string|int $key): bool
     {
         return isset($this->elements[$key]) || array_key_exists($key, $this->elements);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function contains($element)
+    public function contains(mixed $element): bool
     {
         return in_array($element, $this->elements, true);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function exists(\Closure $p)
+    public function exists(\Closure $p): bool
     {
         foreach ($this->elements as $key => $element) {
             if ($p($key, $this->createNavigator($element))) {
                 return true;
             }
         }
+
         return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function indexOf($element)
+    public function indexOf(mixed $element): string|int|bool
     {
         return array_search($element, $this->elements, true);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function get($key)
+    public function get(string|int $key): ?Navigator
     {
         if (isset($this->elements[$key])) {
             return $this->createNavigator($this->elements[$key]);
         }
+
         return null;
     }
 
     /**
-     * {@inheritDoc}
+     * @return array-key[]
      */
-    public function getKeys()
+    public function getKeys(): array
     {
         return array_keys($this->elements);
     }
 
     /**
-     * {@inheritDoc}
+     * @return mixed[]
      */
-    public function getValues()
+    public function getValues(): array
     {
         return array_values($this->elements);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function count()
+    public function count(): int
     {
         return count($this->elements);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function set($key, $value)
+    public function set(string|int $key, mixed $value): void
     {
         $this->elements[$key] = $value;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function add($value)
+    public function add(mixed $value): bool
     {
         $this->elements[] = $value;
+
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function isEmpty()
+    public function isEmpty(): bool
     {
-        return ! $this->elements;
+        return !$this->elements;
     }
 
     /**
@@ -254,15 +201,12 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
      *
      * {@inheritDoc}
      */
-    public function getIterator()
+    public function getIterator(): NavigatorIterator
     {
         return new NavigatorIterator($this->elements);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function map(\Closure $p)
+    public function map(\Closure $p): self
     {
         $c = function ($el) use ($p) {
             return $p($this->createNavigator($el));
@@ -271,10 +215,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
         return new static(array_map($c, $this->elements));
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function filter(\Closure $p)
+    public function filter(\Closure $p): self
     {
         $c = function ($el) use ($p) {
             return $p($this->createNavigator($el));
@@ -283,10 +224,7 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
         return new static(array_filter($this->elements, $c));
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function forAll(\Closure $p)
+    public function forAll(\Closure $p): bool
     {
         foreach ($this->elements as $key => $element) {
             if (!$p($key, $this->createNavigator($element))) {
@@ -298,11 +236,11 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
     }
 
     /**
-     * {@inheritDoc}
+     * @return static[]
      */
-    public function partition(\Closure $p)
+    public function partition(\Closure $p): array
     {
-        $coll1 = $coll2 = array();
+        $coll1 = $coll2 = [];
         foreach ($this->elements as $key => $element) {
             $this->createNavigator($element);
 
@@ -312,31 +250,24 @@ class NavigatorCollection implements \Countable, \IteratorAggregate, \ArrayAcces
                 $coll2[$key] = $element;
             }
         }
-        return array(new static($coll1), new static($coll2));
+
+        return [new static($coll1), new static($coll2)];
     }
 
     /**
      * Returns a string representation of this object.
-     *
-     * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return __CLASS__ . '@' . spl_object_hash($this);
+        return __CLASS__.'@'.spl_object_hash($this);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function clear()
+    public function clear(): void
     {
-        $this->elements = array();
+        $this->elements = [];
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function slice($offset, $length = null)
+    public function slice(int $offset, ?int $length = null): self
     {
         return new static(array_slice($this->elements, $offset, $length, true));
     }

@@ -4,32 +4,20 @@ namespace CoSpirit\HAL;
 
 class NavigatorIterator implements \Iterator
 {
-    /**
-     * @var int
-     */
-    protected $position;
+    protected int $position;
 
     /**
-     * @var array
+     * @param mixed[] $elements
      */
-    protected $elements;
-
-    /**
-     * Constructor.
-     */
-    public function __construct(array $elements)
+    public function __construct(protected array $elements)
     {
-        $this->elements = $elements;
         $this->position = 0;
     }
 
     /**
-     * Create a new Navigator object from an element
-     *
-     * @param  int $position
-     * @return Navigator
+     * Create a new Navigator object from an element.
      */
-    protected function get($position)
+    protected function get(int $position): Navigator
     {
         return new Navigator($this->elements[$position]);
     }
@@ -37,7 +25,7 @@ class NavigatorIterator implements \Iterator
     /**
      * {@inheritdoc}
      */
-    public function current()
+    public function current(): Navigator
     {
         return $this->get($this->position);
     }
@@ -45,7 +33,7 @@ class NavigatorIterator implements \Iterator
     /**
      * {@inheritdoc}
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->position = 0;
     }
@@ -53,7 +41,7 @@ class NavigatorIterator implements \Iterator
     /**
      * {@inheritdoc}
      */
-    public function key()
+    public function key(): int
     {
         return $this->position;
     }
@@ -61,7 +49,7 @@ class NavigatorIterator implements \Iterator
     /**
      * {@inheritdoc}
      */
-    public function next()
+    public function next(): void
     {
         ++$this->position;
     }
@@ -69,7 +57,7 @@ class NavigatorIterator implements \Iterator
     /**
      * {@inheritdoc}
      */
-    public function valid()
+    public function valid(): bool
     {
         return isset($this->elements[$this->position]);
     }

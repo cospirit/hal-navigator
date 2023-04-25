@@ -5,6 +5,10 @@ composer.lock
 !bin/pre-commit
 
  # PHP Cs Fixer
-.php_cs.cache
+.php-cs-fixer.cache
+.php-cs-fixer.php
+
+# PHPStan
+phpstan.neon
 
 system.env

@@ -3,8 +3,10 @@
 namespace Test\CoSpirit\HAL;
 
 use CoSpirit\HAL\RelCollection;
+use LogicException;
+use PHPUnit\Framework\TestCase;
 
-class RelCollectionTest extends \PHPUnit_Framework_TestCase
+class RelCollectionTest extends TestCase
 {
     protected function createRelCollection()
     {
@@ -30,7 +32,7 @@ class RelCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://', $rels->collectionBikes);
         $this->assertNull($rels->anotherLink);
 
-        $this->setExpectedException('LogicException');
+        $this->expectException(LogicException::class);
         $rels->badLink;
     }
 
@@ -45,7 +47,7 @@ class RelCollectionTest extends \PHPUnit_Framework_TestCase
 
     public function testGetHref()
     {
-        $this->setExpectedException('LogicException');
+        $this->expectException(LogicException::class);
 
         $rels = $this->createRelCollection();
 

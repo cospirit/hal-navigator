@@ -4,15 +4,15 @@ namespace CoSpirit\HAL;
 
 class RelCollection
 {
-    const HREF = 'href';
+    public const HREF = 'href';
 
     /**
-     * @var object | array
+     * @var mixed[]
      */
     protected $rels;
 
     /**
-     * @param object | array
+     * @param object|mixed[] $rels
      */
     public function __construct($rels = null)
     {
@@ -20,21 +20,23 @@ class RelCollection
     }
 
     /**
-     * Get all rels
+     * Get all rels.
      *
-     * @return array
+     * @return mixed[]
      */
-    public function all()
+    public function all(): array
     {
         return $this->rels;
     }
 
     /**
-     * Another way to access href of a named link
+     * Another way to access href of a named link.
      *
      * @see    self::getHref
-     * @param  string $key
-     * @return string | null
+     *
+     * @param string $key
+     *
+     * @return string|null
      */
     public function __get($key)
     {
@@ -42,22 +44,21 @@ class RelCollection
     }
 
     /**
-     * Magic isser
-     *
-     * @param  string $key
-     * @return bool
+     * @param string $key
      */
-    public function __isset($key)
+    public function __isset($key): bool
     {
         return true;
     }
 
     /**
-     * Get the href HAL key from a named link
+     * Get the href HAL key from a named link.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @throws \LogicException If HAL format is not respected
-     * @return string | null
+     *
+     * @return string|null
      */
     public function getHref($key)
     {
@@ -72,7 +73,7 @@ class RelCollection
         return null;
     }
 
-    protected function dasheize($str)
+    protected function dasheize(string $str): string
     {
         return strtolower(preg_replace('~(?<=\\w)([A-Z])~', '-$1', $str));
     }

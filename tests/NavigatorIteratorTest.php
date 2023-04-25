@@ -2,9 +2,11 @@
 
 namespace Test\CoSpirit\HAL;
 
+use CoSpirit\HAL\Navigator;
 use CoSpirit\HAL\NavigatorIterator;
+use PHPUnit\Framework\TestCase;
 
-class NavigatorIteratorTest extends \PHPUnit_Framework_TestCase
+class NavigatorIteratorTest extends TestCase
 {
     public function testForeach()
     {
@@ -16,7 +18,7 @@ class NavigatorIteratorTest extends \PHPUnit_Framework_TestCase
         $count = 0;
 
         foreach ($iterator as $nav) {
-            $this->assertInstanceOf('CoSpirit\HAL\Navigator', $nav);
+            $this->assertInstanceOf(Navigator::class, $nav);
             $count++;
         }
 
